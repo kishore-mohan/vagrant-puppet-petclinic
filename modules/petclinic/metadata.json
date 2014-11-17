@@ -1,0 +1,18 @@
+{
+  "name": "petclinic",
+  "version": "0.1.0",
+  "author": "cloudbees",
+  "summary": "Puppet Module to Deploy Spring Petclinic",
+  "license": "Apache 2.0",
+  "source": "http://github.com/cloudbees-community/puppet-cloudbees-petclinic",
+  "issues_url": "https://github.com/cloudbees-community/puppet-cloudbees-petclinic/issues",
+  "project_page": "https://github.com/cloudbees-community/puppet-cloudbees-petclinic",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 4.4.0"},
+    {"name":"puppetlabs-tomcat","version_requirement":">= 1.2.0"},
+    {"name":"puppetlabs-java","version_requirement":">= 1.2.0"},
+    {"name":"puppetlabs-firewall","version_requirement":">= 1.2.0"},
+    {"name":"stahnma/epel","version_requirement":">= 1.0.0"},
+  ]
+}
+

@@ -1,0 +1,4 @@
+
+# class { 'petclinic': } 
+
+include petclinic
