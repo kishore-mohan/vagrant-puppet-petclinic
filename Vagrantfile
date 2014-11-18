@@ -1,9 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-VAGRANTFILE_API_VERSION = "2"
-
-Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+Vagrant.configure("2") do |config|
   config.vm.box = "puppetlabs/centos-7.0-64-puppet"
 
   config.vm.provider "virtualbox" do |v|
@@ -29,7 +27,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.vm.synced_folder "../data", "/vagrant_data"
 
   config.vm.provision :shell do |shell|
-  shell.inline = "
+    shell.inline = "
                   sudo puppet module install puppetlabs-stdlib;
                   sudo puppet module install puppetlabs-java;
                   sudo puppet module install stahnma/epel;
@@ -40,7 +38,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # https://docs.vagrantup.com/v2/provisioning/puppet_apply.html
   config.vm.provision "puppet" do |puppet|
     puppet.module_path = "modules"
-    # puppet.options="--verbose --debug"
-    puppet.options="--verbose"
+    puppet.options=["--verbose"]
   end
 end
