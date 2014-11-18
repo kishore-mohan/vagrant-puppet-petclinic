@@ -1,0 +1,1 @@
+store petclinic.war in this folder when invoking install-local-petclinic.pp
