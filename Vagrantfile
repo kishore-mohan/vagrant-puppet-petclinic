@@ -3,13 +3,14 @@
 
 Vagrant.configure("2") do |config|
   config.vm.box = "puppetlabs/centos-7.0-64-puppet"
+  config.vm.network "forwarded_port", guest: 8080, host: 8080
+  config.vm.network "private_network", type: "dhcp"
 
   config.vm.provider "virtualbox" do |v|
     v.memory = 1024
     v.cpus = 2
   end
 
-  config.vm.network "forwarded_port", guest: 8080, host: 8080
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -39,6 +40,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision "puppet" do |puppet|
     puppet.manifest_file = "default.pp"
     puppet.module_path = "modules"
-    puppet.options=["--verbose", "--debug"]
+    puppet.options=["--verbose", "--debug", "--reports http" ,"--reporturl=http://jenkins.localdomain:8090/puppet/report"]
   end
 end
