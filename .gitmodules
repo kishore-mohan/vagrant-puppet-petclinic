@@ -1,0 +1,3 @@
+[submodule "modules/puppet-jenkinstrackin"]
+	path = modules/puppet-jenkinstrackin
+	url = https://github.com/jenkinsci/puppet-jenkinstracking.git
