@@ -17,18 +17,22 @@
 #
 class petclinic {
 
-  # TOMCAT
-  include tomcat
+  # JAVA
+  class { 'java': } ->
 
+  class { 'epel': }->
+
+  # TOMCAT
+  class { 'tomcat': }
   tomcat::instance{ 'default':
     package_name        => 'tomcat',
     source_url => 'http://archive.apache.org/dist/tomcat/tomcat-8/v8.0.15/bin/apache-tomcat-8.0.15.tar.gz'
-  }
-  tomcat::service { 'default': }
-  
+  } ->
   tomcat::war { 'petclinic.war': 
     war_source => 'puppet:///modules/petclinic/petclinic.war'
-  }
+  } ->
+  tomcat::service { 'default': }
+  
   
   # FIREWALL
   include firewall
