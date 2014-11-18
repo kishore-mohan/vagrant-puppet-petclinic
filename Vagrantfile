@@ -39,6 +39,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision "puppet" do |puppet|
     puppet.manifest_file = "default.pp"
     puppet.module_path = "modules"
-    puppet.options=["--verbose"]
+    puppet.options=["--verbose", "--debug"]
   end
 end
