@@ -34,9 +34,10 @@ class petclinic ($petclinic_war_url = "https://github.com/cyrille-leclerc/spring
     package_name        => 'tomcat',
     source_url => 'http://archive.apache.org/dist/tomcat/tomcat-8/v8.0.15/bin/apache-tomcat-8.0.15.tar.gz'
   } ->
-  file { '/opt/apache-tomcat/webapps/petclinic.war':
-    # manually delete the war because puppetlabs-tomcat:v1.2.0 does not overwrite existing war if the source is "puppet:///..."
-    ensure => 'absent'
+  exec { "refresh_cache":
+    # workaround manually delete the war because puppetlabs-tomcat:v1.2.0 does not overwrite existing war if the source is "puppet:///..."
+    command => "rm /opt/apache-tomcat/webapps/petclinic.war  || :",
+    path    => "/usr/local/bin/:/usr/bin:/bin/"
   } ->
   tomcat::war { 'petclinic.war': 
     war_source => $petclinic_war_url
