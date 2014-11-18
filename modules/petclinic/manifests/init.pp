@@ -46,7 +46,7 @@ class petclinic ($petclinic_war_url = "https://github.com/cyrille-leclerc/spring
   # FIREWALL
   include firewall
 
-  firewall { '100 allow http and https access':
+  firewall { '100 allow http access':
     port   => [8080],
     proto  => tcp,
     action => accept,
