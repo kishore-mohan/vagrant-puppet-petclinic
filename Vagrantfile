@@ -1,11 +1,15 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "puppetlabs/centos-6.5-64-puppet"
+  config.vm.box = "puppetlabs/centos-7.0-64-puppet"
+
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 1024
+    v.cpus = 2
+  end
 
   config.vm.network "forwarded_port", guest: 8080, host: 8080
 
@@ -33,14 +37,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                   sudo puppet module install puppetlabs-firewall;"
   end
 
-  # Enable provisioning with Puppet stand alone.  Puppet manifests
-  # are contained in a directory path relative to this Vagrantfile.
-  # You will need to create the manifests directory and a manifest in
-  # the file default.pp in the manifests_path directory.
-  #
   # https://docs.vagrantup.com/v2/provisioning/puppet_apply.html
   config.vm.provision "puppet" do |puppet|
     puppet.module_path = "modules"
-    puppet.options="--verbose --debug"
+    # puppet.options="--verbose --debug"
+    puppet.options="--verbose"
   end
 end
