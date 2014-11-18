@@ -37,11 +37,12 @@ class petclinic ($petclinic_war_url = "https://github.com/cyrille-leclerc/spring
   tomcat::war { 'petclinic.war': 
     war_source => $petclinic_war_url
   } ->
+  # see https://github.com/jenkinsci/puppet-jenkinstracking/
+  track { '/opt/apache-tomcat/webapps/petclinic.war':
+  } ->
   tomcat::service { 'default': }
   
-  # see https://github.com/jenkinsci/puppet-jenkinstracking/
-  track { '/opt/apache-tomcat/webapps/petclinic.war':}
-  
+
   # FIREWALL
   include firewall
 
