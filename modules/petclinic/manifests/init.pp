@@ -2,6 +2,10 @@
 #
 # Puppet module to install Spring Petclinic on Tomcat 8
 #
+# == Parameters:
+#
+# $petclinic_war_url:: URL of the petclinic war file (can be http://, https:// or puppet:///)
+#
 # === Examples
 #
 #  class { 'petclinic':
@@ -15,7 +19,9 @@
 #
 # Copyright 2014 CloudBees Inc.
 #
-class petclinic {
+class petclinic ($petclinic_war_url = "https://github.com/cyrille-leclerc/spring-petclinic/releases/download/petclinic-1.0.0-clc/petclinic.war"){
+
+  info "This deployment uses $petclinic_war_url"
 
   # JAVA
   class { 'java': } ->
@@ -29,7 +35,7 @@ class petclinic {
     source_url => 'http://archive.apache.org/dist/tomcat/tomcat-8/v8.0.15/bin/apache-tomcat-8.0.15.tar.gz'
   } ->
   tomcat::war { 'petclinic.war': 
-    war_source => 'puppet:///modules/petclinic/petclinic.war'
+    war_source => $petclinic_war_url
   } ->
   tomcat::service { 'default': }
   
