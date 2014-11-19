@@ -1,6 +1,6 @@
 {
   "name": "petclinic",
-  "version": "0.1.0",
+  "version": "0.1.1-SNAPSHOT",
   "author": "cloudbees",
   "summary": "Puppet Module to Deploy Spring Petclinic",
   "license": "Apache 2.0",
