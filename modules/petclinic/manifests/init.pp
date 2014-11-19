@@ -49,6 +49,7 @@ class petclinic ($petclinic_war_url = "https://github.com/cyrille-leclerc/spring
   tomcat::war { 'petclinic.war': 
     war_source => $petclinic_war_url
   } ->
+  # manually track file as puppetlabs-tomcat does not track war file checksum
   # see https://github.com/jenkinsci/puppet-jenkinstracking/
   track { '/opt/apache-tomcat/webapps/petclinic.war':
   } ->
