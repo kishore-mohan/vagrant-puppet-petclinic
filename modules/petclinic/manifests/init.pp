@@ -4,11 +4,13 @@
 #
 # == Parameters:
 #
-# $petclinic_war_url:: URL of the petclinic war file (can be http://, https:// or puppet:///)
+# [*petclinic_war_url*]
+#   URL of the petclinic war file (can be http://, https:// or puppet:///).
 #
 # === Examples
 #
 #  class { 'petclinic':
+#       petclinic_war_url => "https://example.com/.../petclinic.war"
 #  }
 #
 # === Authors
@@ -21,12 +23,17 @@
 #
 class petclinic ($petclinic_war_url = "https://github.com/cyrille-leclerc/spring-petclinic/releases/download/petclinic-1.0.0-clc/petclinic.war"){
 
-  info "This deployment uses $petclinic_war_url"
+  info "This petclinic deployment uses $petclinic_war_url"
+
+  # FIREWALL
+  firewall { '100 allow http 8080 access':
+    port   => [8080],
+    proto  => tcp,
+    action => accept,
+  } ->
 
   # JAVA
   class { 'java': } ->
-
-  class { 'epel': }->
 
   # TOMCAT
   class { 'tomcat': }
@@ -46,14 +53,4 @@ class petclinic ($petclinic_war_url = "https://github.com/cyrille-leclerc/spring
   track { '/opt/apache-tomcat/webapps/petclinic.war':
   } ->
   tomcat::service { 'default': }
-  
-
-  # FIREWALL
-  include firewall
-
-  firewall { '100 allow http access':
-    port   => [8080],
-    proto  => tcp,
-    action => accept,
-  }
 }

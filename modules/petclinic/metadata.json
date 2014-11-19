@@ -11,8 +11,7 @@
     {"name":"puppetlabs-stdlib","version_requirement":">= 4.4.0"},
     {"name":"puppetlabs-tomcat","version_requirement":">= 1.2.0"},
     {"name":"puppetlabs-java","version_requirement":">= 1.2.0"},
-    {"name":"puppetlabs-firewall","version_requirement":">= 1.2.0"},
-    {"name":"stahnma/epel","version_requirement":">= 1.0.0"}
+    {"name":"puppetlabs-firewall","version_requirement":">= 1.2.0"}
   ]
 }
 
